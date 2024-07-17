@@ -9,6 +9,7 @@
  * @param input_size 入力信号のサイズ
  * @param filter フィルタ関数ポインタ
  * @param output フィルタ適用後の信号の出力先
+ * @return なし
  */
 void apply_filter(const Complex* input, int input_size, 
                   Complex (*filter)(Complex), Complex* output);
@@ -21,4 +22,4 @@ void apply_filter(const Complex* input, int input_size,
  */
 Complex (*create_high_pass_filter(double cutoff_freq, double sample_rate))(Complex);
 
-#endif SIGNAL_PROCESSING_H
+#endif // SIGNAL_PROCESSING_H

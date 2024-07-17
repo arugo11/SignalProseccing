@@ -2,6 +2,7 @@
 #define FREQUENCY_ANALYZER_H
 
 #include "complex.h"
+
 /**
  * @brief 信号の主要周波数を同定
  * @param signal 入力信号
@@ -23,4 +24,4 @@ double identify_main_frequency(const double* signal, int size, double sample_rat
 double calculate_power_in_frequency_range(const Complex* dft_coeffs, int size, 
                                           double freq_min, double freq_max, double sample_rate);
 
-#endif /*FREQUENCY_ANALYZER_H*/
+#endif // FREQUENCY_ANALYZER_H

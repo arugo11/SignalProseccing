@@ -1,3 +1,6 @@
+#ifndef SIGNAL_ANALYZER_H
+#define SIGNAL_ANALYZER_H
+
 /**
  * @brief 信号の統計情報を表す構造体
  */
@@ -24,3 +27,5 @@ SignalStats calculate_signal_stats(const double* signal, int size);
  * @return SN比（デシベル）
  */
 double calculate_snr(const double* signal, const double* noise, int size);
+
+#endif // SIGNAL_ANALYZER_H

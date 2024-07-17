@@ -1,3 +1,6 @@
+#ifndef IO_HANDLER_H
+#define IO_HANDLER_H
+
 /**
  * @brief テキストファイルから信号を読み込む
  * @param filename ファイル名
@@ -15,3 +18,5 @@ int read_signal_from_file(const char* filename, double* output, int max_size);
  * @return 成功時は0、失敗時は-1
  */
 int write_signal_to_file(const char* filename, const double* signal, int size);
+
+#endif // IO_HANDLER_H

@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 LDFLAGS = -lm
 
-SRCS = solver.c io_handler.c dct.c
+SRCS = main.c io_handler.c dct.c
 OBJS = $(SRCS:.c=.o)
-TARGET = solver
+TARGET = main
 
 .PHONY: all clean
 

@@ -3,24 +3,14 @@
 
 #include <math.h>
 
-/**
- * @brief 円周率のマクロ
-*/
-#define Pi atan(1.0) * 4;
+
 
 
 /**
- * @brief 高速な二乗根計算
- * @param x 入力値
- * @return 二乗根
+ * @brief 小数点第n位で四捨五入する
+ * @param src 四捨五入する値
+ * @param n 四捨五入する位
+ * @return 四捨五入した値
  */
-double fast_sqrt(double x);
-
-/**
- * @brief 高速な逆数計算
- * @param x 入力値
- * @return 逆数
- */
-double fast_inverse(double x);
-
+double roundN(double src, int n);
 #endif // MATH_UTILS_H

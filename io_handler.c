@@ -10,7 +10,7 @@
 int read_real_1d(const char* filename, double* output, int max_size)
 {
     char filepath[MAX_FILENAME_LENGTH];
-    snprintf(filepath, sizeof(filepath), "data/%s", filename); // ファイルパスの設定
+    snprintf(filepath, sizeof(filepath), "input/%s", filename); // ファイルパスの設定
 
     FILE* fp = fopen(filepath, "r");
     if (fp == NULL)
@@ -51,7 +51,7 @@ int write_real_1d(const char* filename, const double* data, int size)
 int read_complex_1d(const char* filename, Complex* output, int max_size)
 {
     char filepath[MAX_FILENAME_LENGTH];
-    snprintf(filepath, sizeof(filepath), "data/%s", filename); // ファイルパスの設定
+    snprintf(filepath, sizeof(filepath), "input/%s", filename); // ファイルパスの設定
 
     FILE* fp = fopen(filepath, "r");
     if (fp == NULL)
@@ -95,7 +95,7 @@ int write_complex_1d(const char* filename, const Complex* data, int size)
 int read_real_2d(const char* filename, double** output, int max_rows, int max_cols)
 {
     char filepath[MAX_FILENAME_LENGTH];
-    snprintf(filepath, sizeof(filepath), "data/%s", filename); // ファイルパスの設定
+    snprintf(filepath, sizeof(filepath), "input/%s", filename); // ファイルパスの設定
 
     FILE* fp = fopen(filepath, "r");
     if (fp == NULL)

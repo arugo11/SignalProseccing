@@ -6,8 +6,45 @@
 */
 
 #include <stdio.h>
+#include <math.h>
+
+#include "math_utils.h"
 #include "dct.h"
 #include "io_handler.h"
+
+
+
+
+
+void kadai1_1(void)
+{
+    int sum = 0;
+    for(int i = 0; i < 50; i++)
+    {
+        sum += i * (i - 10);
+        if((i == 24) || (i == 49))
+        {
+            printf("%d \n",sum);
+        }
+    }
+}
+void kadai1_2(void)
+{
+    double Pi = atan(1.0) * 4;
+
+    float sum = 0;
+    float vector;
+    for(int i = 0; i < 50; i++)
+    {
+        vector = (i * Pi) / 100.0;
+        sum += sin(vector);
+        if((i == 29) || (i == 49))
+        {
+            sum = roundN(sum,2);
+            printf("%.1f \n",sum);
+        }
+    }
+}
 
 void kadai1_3(void)
 {
@@ -16,26 +53,74 @@ void kadai1_3(void)
 
     dct(f_n,8,C_k);
 
-    write_real_1d("./output/kadai1_3", C_k,8);
+    write_real_1d("kadai1_3", C_k,8);
 
-
+    double ans = roundN(C_k[4],2);
+    printf("%.1lf \n", ans);
 }   
 
 void kadai1_4(void)
 {
-    double C3[100];
-    double f3a[100];
-    double fc3a[100];
-    read_real_1d("./input/DCT_a.txt",C3,100);
-    dct(C3,100,f3a);
-    idct(f3a,100,fc3a);
-    write_real_1d("kadai1_4_f3a",f3a,100);
-    write_real_1d("kadai1_4_fc3a",fc3a,100);
+    int N = 100;
+    double c3[N];
+    double c3a[N];
+    double f3[N];
+    double f3a[N];
+    read_real_1d("DCT_a.txt",f3,N);
+    dct(f3,100,c3);
+
+    int CUTOFF = 20;
+    for(int i = 0; i < N; i++)
+    {
+        if(i < CUTOFF) c3a[i] = c3[i];
+        else c3a[i] = 0.0;
+    }
+
+    idct(c3a,N,f3a);
+    write_real_1d("kadai1_4_f3",f3,N);
+    write_real_1d("kadai1_4_f3a",f3a,N);
+
+    double ans = roundN(f3a[10],2);
+    printf("%.1lf\n",ans);
+}
+
+void kadai1_5(void)
+{
+    int N = 100;
+    
+    double f3[N];
+    double c3[N];
+    double c3b[N];
+    double f3b[N];
+
+    read_real_1d("DCT_a.txt",f3,N);
+
+    dct(f3,N,c3);
+
+    for(int i = 0; i < N ; i++)
+    {
+        c3b[i] = floor(c3[i]/20.0+0.5)*20;
+    }
+
+    idct(c3b,N,f3b);
+    write_real_1d("kadai1_5_c3b",c3b,N);
+    write_real_1d("kadai1_5_f3",f3,N);
+    write_real_1d("kadai1_5_f3b",f3b,N);
+    
+    double ans = roundN(f3b[10],2);
+    printf("%.1lf \n",ans);
+
+
 }
 
 int main()
 {
+
+    kadai1_1();
+    kadai1_2();
+    kadai1_3();
     kadai1_4();
+    kadai1_5();
 
     return 0;
 }

@@ -1,4 +1,20 @@
-# 配布ファイル
-./input/
+# 拡張子なし(実行ファイル)
+*
+!*/
+!*.*
+
+# 環境設定
+.vscode/
+build/
+venv/
+
+# 入出力
+input/
+output/
+
+# 資料
+kadai.pdf
+
+# リンクファイル
 *.o
-./.vscode/
+

@@ -8,7 +8,7 @@ def main():
     args = sys.argv
     filename = args[1]  
 
-    filepath = f"./input/{filename}"
+    filepath = f"./output/{filename}"
     input_csv = pd.read_csv(filepath)
     input_data = input_csv[input_csv.keys()[0]]
     n = len(input_csv)

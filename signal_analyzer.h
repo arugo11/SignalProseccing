@@ -1,31 +1,25 @@
-#ifndef SIGNAL_ANALYZER_H
-#define SIGNAL_ANALYZER_H
+#ifndef SIGNAL_ANALYZER_H_
+#define SIGNAL_ANALYZER_H_
 
-/**
- * @brief 信号の統計情報を表す構造体
+/** @fn 
+ * @brief DFTを使用して信号の主要周波数を計算する
+ * @param filename 入力信号データのファイル名
+ * @param sample_count サンプル数
+ * @param sampling_freq サンプリング周波数
+ * @return 主要周波数（Hz）。エラーの場合は負の値を返す
  */
-typedef struct {
-    double mean;    /**< 平均 */
-    double variance; /**< 分散 */
-    double max;      /**< 最大値 */
-    double min;      /**< 最小値 */
-} SignalStats;
+double calculate_main_frequency(double* input, int sample_count, double sampling_freq);
 
-/**
- * @brief 信号の統計情報を計算
- * @param signal 入力信号
- * @param size 信号のサイズ
- * @return 統計情報
+/** @fn 
+ * @brief 信号のパワーを計算する
+ * @param input 入力信号
+ * @param input_size 入力信号のサイズ
+ * @param sampling_freq サンプリング周波数
+ * @param start_freq 範囲の開始地点
+ * @param end_freq 範囲の終了地点
+ * @return 信号のパワー
  */
-SignalStats calculate_signal_stats(const double* signal, int size);
+double calculate_signal_power(double* input, int input_size, double sampling_freq, double start_freq, double end_freq);
 
-/**
- * @brief 信号のSN比を計算
- * @param signal 入力信号
- * @param noise ノイズ信号
- * @param size 信号のサイズ
- * @return SN比（デシベル）
- */
-double calculate_snr(const double* signal, const double* noise, int size);
 
-#endif // SIGNAL_ANALYZER_H
+#endif // SIGNAL_ANALYSIS_H

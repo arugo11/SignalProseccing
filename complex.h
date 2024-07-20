@@ -1,5 +1,5 @@
-#ifndef COMPLEX_H
-#define COMPLEX_H
+#ifndef COMPLEX_H_
+#define COMPLEX_H_
 
 /**
  * @brief 複素数を表す構造体

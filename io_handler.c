@@ -1,3 +1,10 @@
+/** 
+ * @fn io_handler.c
+ * @brief ファイルの入出力
+ * @author Argo
+ * @date 2024/07/18
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -15,3 +15,10 @@
  */
 double roundN(double src, int n);
 #endif // MATH_UTILS_H
+
+// /** @fn
+//  * @brief 二乗和の計算
+//  * @param input 入力
+//  * @return 演算結果
+//  */
+// double square_sum(double* input);

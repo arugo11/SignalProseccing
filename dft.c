@@ -1,7 +1,7 @@
 /***
  * @file dft.c
  * @brief DFT(離散フーリエ変換),IDFT(逆離散フーリエ変換)の実装
- * @author Argo (updated by Claude)
+ * @author Argo
  * @date 2024/07/20
  */
 
@@ -36,13 +36,15 @@ void idft(const Complex* coeffs, int coeffs_size, double* output)
     double omega_conj = 2 * Pi / N;
     double vector;
 
-    for(int n = 0; n < N; n++){
+    for(int n = 0; n < N; n++) {
         output[n] = 0;
-        for(int k = 0; k < N; k++)
-        {
+        for(int k = 0; k < N; k++) {
             vector = (double)n * (double)k * omega_conj;
-            Complex multi = {cos(vector), sin(vector)};
-            output[n] += complex_multiply(coeffs[k], multi ).re;
+            Complex multi;
+            multi.re = cos(vector);
+            multi.im = sin(vector);
+            Complex term = complex_multiply(coeffs[k], multi);
+            output[n] += term.re;
         }
         output[n] /= N;
     }

@@ -19,3 +19,15 @@ double roundN(double src, int n)
 
     return dst;
 }
+
+// double square_sum(double* input)
+// {
+//     int N = (sizeof(input) / sizeof(input[0]));
+//     double sum = 0;
+//     for(int i = 0; i < N; i++)
+//     {
+//         sum += input[i] * input[i];
+//     }
+
+//     return sum;
+// }

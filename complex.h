@@ -5,8 +5,8 @@
  * @brief 複素数を表す構造体
  */
 typedef struct {
-    double re;  /**< 実部 */
-    double im;  /**< 虚部 */
+    double re;  /** 実部 */
+    double im;  /** 虚部 */
 } Complex;
 
 /**

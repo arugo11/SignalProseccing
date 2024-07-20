@@ -19,6 +19,6 @@ void dft(const double* input, int input_size, Complex* output);
  * @param output 復元された信号の出力先
  * @return なし
  */
-void idft(const Complex* coeffs, int coeffs_size, Complex* output);
+void idft(const Complex* coeffs, int coeffs_size, double* output);
 
 #endif // DFT_H

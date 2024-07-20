@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 LDFLAGS = -lm
 
-SRCS = main.c io_handler.c dct.c math_utils.c
+SRCS = main.c io_handler.c dct.c math_utils.c complex.c dft.c
 OBJS = $(SRCS:.c=.o)
 TARGET = main
 

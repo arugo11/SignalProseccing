@@ -1,6 +1,6 @@
 /***
- * @file solver.c
- * @brief 課題の内容を計算するためのコード
+ * @file main.c
+ * @brief 課題の内容を計算
  * @author argo
  * @date 2024/07/17
 */
@@ -11,7 +11,8 @@
 #include "math_utils.h"
 #include "dct.h"
 #include "io_handler.h"
-
+#include "complex.h"
+#include "dft.h"
 
 
 
@@ -28,9 +29,9 @@ void kadai1_1(void)
         }
     }
 }
+
 void kadai1_2(void)
 {
-    double Pi = atan(1.0) * 4;
 
     float sum = 0;
     float vector;
@@ -113,14 +114,40 @@ void kadai1_5(void)
 
 }
 
+
+
+void kadai2_1(void)
+{
+    Complex f;
+    f.re = 2;f.im = 1;
+
+    Complex b;
+    b.re = 1; b.im = 2;
+
+    for(int i = 1; i <= 20; i++)
+    {
+        f = complex_multiply(f,b);
+        if((i == 10) || (i == 20))
+        {
+            printf("%.0lf + j%.0lf\n",f.re,f.im);
+        }
+    }
+}
+
+
+
+void kadai2_2(void)
+{
+    double ft[] = {2,3,1,0,12,4,1,8};
+    double ft_t[8];
+    int N = sizeof(ft) / sizeof(ft[0]);
+    Complex Ft[N];
+    dft(ft, N, Ft);
+    idft(Ft,N,ft_t);
+    printf("%.1lf + j%.1lf",roundN(Ft[4].re,2), roundN(Ft[4].im,2));
+}
 int main()
 {
-
-    kadai1_1();
-    kadai1_2();
-    kadai1_3();
-    kadai1_4();
-    kadai1_5();
 
     return 0;
 }

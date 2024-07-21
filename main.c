@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "complex.h"
 #include "math_utils.h"
@@ -16,6 +17,7 @@
 #include "dft.h"
 #include "signal_analyzer.h"
 #include "signal_filter.h"
+#include "fft.h"
 
 
 
@@ -202,24 +204,22 @@ void kadai2_5(void)
 
 void kadai2_6(void)
 {
-    int N = 1000;  // 2秒間 * 500Hz
-    double sampling_freq = 500.0;  // Hz
+    int N = 1000; 
+    double sampling_freq = 500.0;  
     double input[N];
 
-    // DFT_c.txtからデータを読み込む
     read_real_1d("DFT_c.txt", input, N);
 
-    // 各周波数範囲のパワーを計算
     double power_2_4 = calculate_signal_power(input, N, sampling_freq, 2.0, 4.0);
     double power_15_17 = calculate_signal_power(input, N, sampling_freq, 15.0, 17.0);
     double power_61_63 = calculate_signal_power(input, N, sampling_freq, 61.0, 63.0);
 
-    // 結果を表示
+
     printf("2-4 Hz:   %e\n", power_2_4);
     printf("15-17 Hz: %e\n", power_15_17);
     printf("61-63 Hz: %e\n", power_61_63);
 
-    // 最大パワーを持つ範囲を特定
+
     if (power_2_4 > power_15_17 && power_2_4 > power_61_63) {
         printf("最大パワー: 2-4 Hz\n");
     } else if (power_15_17 > power_2_4 && power_15_17 > power_61_63) {
@@ -229,15 +229,30 @@ void kadai2_6(void)
     }
 }
 
+void kadai3_1()
+{
+
+    int WINDOW_SIZE = 256;
+    int SAMPLING_RATE = 100;
+    int MAX_DATA_SIZE = 4096;
+
+    double* data = (double*)malloc(sizeof(double) * MAX_DATA_SIZE);
+    int data_size = read_real_1d("FFT_a.txt", data, MAX_DATA_SIZE);
+
+
+    double initial_freq = calculate_main_frequency(data, WINDOW_SIZE, SAMPLING_RATE);
+    double final_freq = calculate_main_frequency(data + data_size - WINDOW_SIZE, WINDOW_SIZE, SAMPLING_RATE);
+
+    printf(" 初期周波数 : %d Hz\n", (int)round(initial_freq));
+    printf("最終周波数 :%d Hz\n", (int)round(final_freq));
+
+    free(data);
+}
+
 
 int main()
 {
-    kadai2_1();
-    kadai2_2();
-    // kadai2_3();
-    kadai2_4();
-    kadai2_5();
-    kadai2_6();
+    kadai3_1();
 
     return 0;
 }

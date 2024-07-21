@@ -25,3 +25,11 @@ Complex complex_multiply(Complex a, Complex b)
 
     return ret;
 }
+Complex complex_subtract(Complex a, Complex b)
+{
+    Complex ret;
+    ret.re = a.re - b.re;
+    ret.im = a.im - b.im;
+
+    return ret;
+}

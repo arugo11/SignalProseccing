@@ -25,4 +25,13 @@ Complex complex_add(Complex a, Complex b);
  */
 Complex complex_multiply(Complex a, Complex b);
 
+/**
+ * @brief 複素数の引き算
+ * @param a 第一オペランド
+ * @param b 第二オペランド
+ * @return 乗算結果の複素数
+ */
+Complex complex_subtract(Complex a, Complex b);
+
+
 #endif // COMPLEX_H

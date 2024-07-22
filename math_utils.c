@@ -20,6 +20,11 @@ double roundN(double src, int n)
     return dst;
 }
 
+double decimalN(double src, int n){
+    double multiplier = pow(10.0, n);
+    return floor(src * multiplier) / multiplier;
+}
+
 // double square_sum(double* input)
 // {
 //     int N = (sizeof(input) / sizeof(input[0]));

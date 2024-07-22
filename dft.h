@@ -21,4 +21,22 @@ void dft(const double* input, int input_size, Complex* output);
  */
 void idft(const Complex* coeffs, int coeffs_size, double* output);
 
+    /**
+     * @brief dftの２次元変換
+     * @param input 入力信号
+     * @param n 行数
+     * @param m 列数
+     * @param output 出力信号
+     */
+    void dft2d(const double** input, int n, int m, Complex** output);
+
+    /**
+     * @brief idftの２次元変換
+     * @param input 入力信号
+     * @param n 行数
+     * @param m 列数
+     * @param output 出力信号
+     */
+    void idft2d(const Complex** input, int n, int m, double** output);
+
 #endif // DFT_H

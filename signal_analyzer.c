@@ -22,7 +22,7 @@ double calculate_main_frequency(double* input, int sample_count, double sampling
 
     //// DFTを適用
     //FFTを適用
-    fft(input, sample_count, output);
+    dft(input, sample_count, output);
 
     // 最大振幅を持つ周波数成分を見つける
     int max_index = 0;
@@ -73,12 +73,3 @@ double calculate_signal_power(double* input, int input_size, double sampling_fre
 
 
 
-
-void stft(const double* input, int input_size, int shift_size, int step_size, Complex** output, int* num_frames) {
-    *num_frames = (input_size - shift_size) / step_size + 1;
-    *output = (Complex*)malloc(sizeof(Complex) * shift_size * (*num_frames));
-
-    for (int i = 0; i < *num_frames; i++) {
-        fft(input + i * step_size, shift_size, *output + i * shift_size);
-    }
-}

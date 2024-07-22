@@ -25,14 +25,14 @@ int read_real_1d(const char* filename, double* output, int max_size)
         return -1; // ファイルオープンに失敗
     }
 
-    int count = 0;
-    while (count < max_size && fscanf(fp, "%lf", &output[count]) == 1)
+    int cnt = 0;
+    while (cnt < max_size && fscanf(fp, "%lf", &output[cnt]) == 1)
     {
-        count++; // 成功した読み込みの数をカウント
+        cnt++; // 成功した読み込みの数をカウント
     }
 
     fclose(fp);
-    return count; // 読み込んだ要素の数を返す
+    return cnt; // 読み込んだ要素の数を返す
 }
 
 int write_real_1d(const char* filename, const double* data, int size)
@@ -66,17 +66,17 @@ int read_complex_1d(const char* filename, Complex* output, int max_size)
         return -1; // ファイルオープンに失敗
     }
 
-    int count = 0;
+    int cnt = 0;
     double real, imag;
-    while (count < max_size && fscanf(fp, "%lf %lf", &real, &imag) == 2)
+    while (cnt < max_size && fscanf(fp, "%lf %lf", &real, &imag) == 2)
     {
-        output[count].re = real;
-        output[count].im = imag;
-        count++; // 成功した読み込みの数をカウント
+        output[cnt].re = real;
+        output[cnt].im = imag;
+        cnt++; // 成功した読み込みの数をカウント
     }
 
     fclose(fp);
-    return count; // 読み込んだ要素の数を返す
+    return cnt; // 読み込んだ要素の数を返す
 }
 
 int write_complex_1d(const char* filename, const Complex* data, int size)
@@ -99,7 +99,70 @@ int write_complex_1d(const char* filename, const Complex* data, int size)
     return 0;
 }
 
-int read_real_2d(const char* filename, double** output, int max_rows, int max_cols)
+
+int write_real_2d(const char* filename, const double** data, int rows, int cols) {
+    if (filename == NULL || data == NULL || rows <= 0 || cols <= 0) {
+        return -1; // 引数の検証
+    }
+
+    char filepath[MAX_FILENAME_LENGTH];
+    snprintf(filepath, sizeof(filepath), "output/%s.csv", filename);
+
+    FILE* fp = fopen(filepath, "w");
+    if (fp == NULL) {
+        return -1;
+    }
+
+    for (int i = 0; i < rows; i++) {
+        if (data[i] == NULL) { // data[i]がNULLでないことを確認
+            fclose(fp);
+            return -1;
+        }
+        for (int j = 0; j < cols; j++) {
+            fprintf(fp, "%f", data[i][j]);
+            if (j < cols - 1) {
+                fprintf(fp, ",");
+            }
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+int write_complex_2d(const char* filename, const Complex** data, int max_rows, int max_cols) {
+    if (filename == NULL || data == NULL || max_rows <= 0 || max_cols <= 0) {
+        return -1; // 引数の検証
+    }
+
+    char filepath[MAX_FILENAME_LENGTH];
+    snprintf(filepath, sizeof(filepath), "output/%s.csv", filename);
+
+    FILE* fp = fopen(filepath, "w");
+    if (fp == NULL) {
+        return -1;
+    }
+
+    for (int i = 0; i < max_rows; i++) {
+        if (data[i] == NULL) { // data[i]がNULLでないことを確認
+            fclose(fp);
+            return -1;
+        }
+        for (int j = 0; j < max_cols; j++) {
+            fprintf(fp, "%f + %fi", data[i][j].re, data[i][j].im);
+            if (j < max_cols - 1) {
+                fprintf(fp, ",");
+            }
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+int cnt_size(const char* filename)
 {
     char filepath[MAX_FILENAME_LENGTH];
     snprintf(filepath, sizeof(filepath), "input/%s", filename); // ファイルパスの設定
@@ -107,49 +170,55 @@ int read_real_2d(const char* filename, double** output, int max_rows, int max_co
     FILE* fp = fopen(filepath, "r");
     if (fp == NULL)
     {
-        return -1; // ファイルオープンに失敗
+        return -1; // ファイルオープンに失敗した場合
     }
 
-    for (int i = 0; i < max_rows; i++)
+    int cnt = 0;
+    char buffer[1024]; // 1行を読み込むためのバッファ
+    while (fgets(buffer, sizeof(buffer), fp) != NULL)
     {
-        for (int j = 0; j < max_cols; j++)
-        {
-            if (fscanf(fp, "%lf", &output[i][j]) != 1)
-            {
-                fclose(fp);
-                return i; // 読み込んだ行数を返す
-            }
-        }
+        cnt++; // ファイルの行数をカウント
     }
 
     fclose(fp);
-    return max_rows; // 全ての行を読み込んだ
+    return cnt; // ファイルの行数を返す
 }
 
-int write_real_2d(const char* filename, const double** data, int rows, int cols)
-{
-    char filepath[MAX_FILENAME_LENGTH];
-    snprintf(filepath, sizeof(filepath), "output/%s.csv", filename);
+#include <dirent.h>
+#include <stdlib.h>
+#include <string.h>
 
-    FILE* fp = fopen(filepath, "w");
-    if (fp == NULL)
-    {
-        return -1;
+char** get_file_names(const char* dir_path, int* num_files) {
+    DIR* dir;
+    struct dirent* entry;
+    char** file_names = NULL;
+    int count = 0;
+
+    dir = opendir(dir_path);
+    if (dir == NULL) {
+        perror("opendir");
+        return NULL;
     }
 
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            fprintf(fp, "%f", data[i][j]);
-            if (j < cols - 1)
-            {
-                fprintf(fp, ","); // カンマで列を区切る
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_REG) {
+            file_names = realloc(file_names, (count + 1) * sizeof(char*));
+            if (file_names == NULL) {
+                perror("realloc");
+                closedir(dir);
+                return NULL;
             }
+            file_names[count] = strdup(entry->d_name);
+            if (file_names[count] == NULL) {
+                perror("strdup");
+                closedir(dir);
+                return NULL;
+            }
+            count++;
         }
-        fprintf(fp, "\n"); // 各行の終わりに改行を挿入
     }
 
-    fclose(fp);
-    return 0;
+    closedir(dir);
+    *num_files = count;
+    return file_names;
 }

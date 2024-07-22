@@ -30,4 +30,22 @@
      */
     int reverse_bit(int num, int m);
 
+    /**
+     * @brief fftの２次元変換
+     * @param input 入力信号
+     * @param n 行数
+     * @param m 列数
+     * @param output 出力信号
+     */
+    void fft2d(const double** input, int rows, int cols, Complex** output);
+
+    /**
+     * @brief ifftの２次元変換
+     * @param input 入力信号
+     * @param n 行数
+     * @param m 列数
+     * @param output 出力信号
+     */
+    void ifft2d(const Complex** coeffs, int rows, int cols, double** output);
+
     #endif // FFT_H_

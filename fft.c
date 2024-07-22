@@ -1,3 +1,10 @@
+/***
+ * @file fft.c
+ * @brief FFT(高速フーリエ変換),IFFT(逆高速フーリエ変換)の実装
+ * @author argo
+ * @date 2024/07/20
+ */
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>

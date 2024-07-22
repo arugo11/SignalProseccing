@@ -8,14 +8,19 @@
 build/
 venv/
 
+#
+signal_processing.c
+
 # 入出力
 input/
 output/
+test/
 
 # 資料
 kadai.pdf
 todo.md
 memo.md
+dsd.md
 
 # リンクファイル
 *.o

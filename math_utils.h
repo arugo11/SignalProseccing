@@ -15,10 +15,9 @@
  */
 double roundN(double src, int n);
 #endif // MATH_UTILS_H
-
-// /** @fn
-//  * @brief 二乗和の計算
-//  * @param input 入力
-//  * @return 演算結果
-//  */
-// double square_sum(double* input);
+/**
+ * @brief 小数点第n位で切り捨てする
+ * @param src 切り捨てする値
+ * @param n 切り捨てする位
+ */
+double decimalN(double src, int n) ;

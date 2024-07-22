@@ -21,9 +21,7 @@ double calculate_main_frequency(double* input, int sample_count, double sampling
  * @return 信号のパワー
  */
 double calculate_signal_power(double* input, int input_size, double sampling_freq, double start_freq, double end_freq);
-
-
-
+    
 
 
 

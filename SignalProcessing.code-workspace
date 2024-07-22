@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.md": "markdown",
+			"numbers": "c",
+			"cstdlib": "c",
+			"cmath": "cpp",
+			"complex": "cpp",
+			"io_handler.h": "c",
+			"math_utils.h": "c",
+			"dct.h": "c",
+			"vector": "c",
+			"memo": "c",
+			"complex.h": "c",
+			"dft.h": "c",
+			"string.h": "c",
+			"signal_processing.h": "c"
+		}
+	}
+}

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "complex.h"
 #include "math_utils.h"
@@ -18,6 +19,7 @@
 #include "signal_analyzer.h"
 #include "signal_filter.h"
 #include "fft.h"
+#include "signal_processing.h"
 
 
 
@@ -139,9 +141,6 @@ void kadai2_1(void) {
     }
 }
 
-
-
-
 void kadai2_2(void)
 {
     double ft[] = {2,3,1,0,12,4,1,8};
@@ -229,6 +228,8 @@ void kadai2_6(void)
     }
 }
 
+
+
 void kadai3_1()
 {
 
@@ -249,10 +250,64 @@ void kadai3_1()
     free(data);
 }
 
+void kadai4()
+{
+    double x[4][4] = {
+        {1, 2, 4, -1},
+        {3, 5, 11, 4},
+        {-4, 23, 2, -10},
+        {4, 9, -3, 2}
+    };
+    
+    double X_dct[4][4];
+
+
+    double* x_ptr[4];
+    double* X_dct_ptr[4];
+
+    for (int i = 0; i < 4; i++) {
+        x_ptr[i] = x[i];
+        X_dct_ptr[i] = X_dct[i];
+
+    }
+
+    dct2d((const double**)x_ptr, 4, 4, X_dct_ptr);
+
+    for(int i = 0;i < 4; i++)
+    {
+        for(int j = 0; j < 4; j++)
+        {
+            printf("%.1lf ",X_dct[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+
+void test2023_2_1()
+{
+    double input[1024];
+    double output[1024];
+    read_real_1d("Signal2.txt",input,1024);
+    dct(input,1024,output);
+    printf("%.1lf\n",decimalN(output[123],2));
+}
+
+
+
 
 int main()
 {
-    kadai3_1();
+    // (void)argc;
+    // if (argc > 1 && strcmp(argv[1], "c") == 0)
+    // {
+    //     signal_processing();//どうしよっかなーー！！
+    //     return 0;
+    // }
+    
+    kadai2_4();
+    kadai2_5();
+
 
     return 0;
 }

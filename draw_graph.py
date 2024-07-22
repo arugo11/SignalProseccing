@@ -5,14 +5,22 @@ import numpy as np
 
 def main():
     args = sys.argv
-    filename1 = args[1]  
+    
+    # デフォルト
+    default_filename = 'output.csv'
+    
+    if len(args) < 2:
+        filename1 = default_filename
+    else:
+        filename1 = args[1]
+        
     filepath1 = f"./output/{filename1}"
     
     input_csv1 = pd.read_csv(filepath1)
     input_data1 = input_csv1[input_csv1.keys()[0]]
     n1 = len(input_csv1)
     y1 = []
-    x1 = np.arange(0, n1, 1)  
+    x1 = np.arange(0, n1, 1)
     _ = [y1.append(i) for i in input_data1]
 
     plt.plot(x1, y1, label=filename1)

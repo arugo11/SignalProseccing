@@ -54,9 +54,9 @@ void LPF_complex(Complex* input, int input_size, int cutoff, Complex* output) {
 
 void HPF_real(double* input, int input_size, int cutoff, double* output)
 {
-    for(int i = 0; i < input_size; i++)
+    for(int i = 0; i <= input_size; i++)
     {
-        if(i < cutoff)
+        if(i <= cutoff)
         {
             output[i] = 0.0;
         }
@@ -66,9 +66,9 @@ void HPF_real(double* input, int input_size, int cutoff, double* output)
 
 void LPF_real(double* input, int input_size, int cutoff, double* output)
 {
-    for(int i = 0; i < input_size; i++)
+    for(int i = 0; i <= input_size; i++)
     {
-        if(i > cutoff)
+        if(i >= cutoff)
         {
             output[i] = 0.0;
         }

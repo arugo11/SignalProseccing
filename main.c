@@ -69,14 +69,15 @@ void kadai1_3(void)
 void kadai1_4(void)
 {
     int N = 100;
-    // double c3[N];
+    double c3[N];
     double c3a[N];
     double f3[N];
     double f3a[N];
     read_real_1d("DCT_a.txt",f3,N);
-    LPF(f3,N,20,c3a);
+    dct(f3,N,c3);
+    LPF_real(c3,N,20,c3a);
     idct(c3a,N,f3a);
-    printf("kadai1-4 : %.1lf \n",roundN(f3a[10],2));
+    // printf("kadai1-4 : %.1lf \n",roundN(f3a[10],2));
     write_real_1d("kadai1_4_f3",f3,N);
     write_real_1d("kadai1_4_f3a",f3a,N);
     // write_real_1d("kadai1_4_c3a",c3a,N);/
@@ -181,10 +182,13 @@ void kadai2_5(void)
     int N = 100;
     double f4[N];
     double fc4[N];
+    Complex F4[N];
+    Complex Fc4[N];
 
     read_real_1d("DFT_b.txt",f4,N);
-
-    HPF(f4,N,10,fc4);
+    dft(f4,N,F4);
+    HPF_complex(F4,N,10,Fc4);
+    idft(Fc4,N,fc4);
     write_real_1d("kadai2_5_f4",f4,N);
     write_real_1d("kadai2_5_fc4",fc4,N);
 

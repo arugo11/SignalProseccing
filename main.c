@@ -19,7 +19,7 @@
 #include "signal_analyzer.h"
 #include "signal_filter.h"
 #include "fft.h"
-#include "signal_processing.h"
+// #include "signal_processing.h"
 
 
 
@@ -69,26 +69,18 @@ void kadai1_3(void)
 void kadai1_4(void)
 {
     int N = 100;
-    double c3[N];
+    // double c3[N];
     double c3a[N];
     double f3[N];
     double f3a[N];
     read_real_1d("DCT_a.txt",f3,N);
-    dct(f3,100,c3);
-
-    int CUTOFF = 10;
-    for(int i = 0; i < N; i++)
-    {
-        if(i < CUTOFF) c3a[i] = c3[i];
-        else c3a[i] = 0.0;
-    }
-
+    LPF(f3,N,20,c3a);
     idct(c3a,N,f3a);
+    printf("kadai1-4 : %.1lf \n",roundN(f3a[10],2));
     write_real_1d("kadai1_4_f3",f3,N);
     write_real_1d("kadai1_4_f3a",f3a,N);
+    // write_real_1d("kadai1_4_c3a",c3a,N);/
 
-    double ans = roundN(f3a[10],2);
-    printf("%.1lf\n",ans);
 }
 
 void kadai1_5(void)
@@ -305,8 +297,11 @@ int main()
     //     return 0;
     // }
     
-    kadai2_4();
-    kadai2_5();
+    kadai1_1();
+    kadai1_2();
+    kadai1_3();
+    kadai1_4();
+    kadai1_5();
 
 
     return 0;
